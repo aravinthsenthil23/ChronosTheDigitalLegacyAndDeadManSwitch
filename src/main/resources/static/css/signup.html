@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initialize Chronos Vault</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* --- 1. CYBERPUNK THEME SETUP --- */
+        :root {
+            --primary: #00f3ff; /* Neon Cyan */
+            --secondary: #ff0055; /* Neon Red */
+            --bg-dark: #02020a; /* Deepest Space */
+            --glass: rgba(10, 10, 25, 0.85);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* --- 2. ANIMATED CIRCUIT BACKGROUND --- */
+        .circuit-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 200%; height: 200%;
+            background-image:
+                    linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+            background-size: 100px 100px;
+            transform: perspective(1000px) rotateX(60deg) translateY(-100px);
+            animation: circuitFlow 30s linear infinite;
+            z-index: -2;
+            opacity: 0.5;
+        }
+
+        @keyframes circuitFlow {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 200px; }
+        }
+
+        .overlay-glow {
+            position: fixed;
+            top: 50%; left: 50%;
+            width: 100vw; height: 100vh;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        /* --- 3. THE VAULT FORM CONTAINER --- */
+        .signup-container {
+            width: 100%;
+            max-width: 550px;
+            background: var(--glass);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* The glowing border line on top */
+        .signup-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            animation: scanline 4s linear infinite;
+        }
+        @keyframes scanline { 0% { left: -100%; } 100% { left: 100%; } }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            color: var(--primary);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+
+        /* --- 4. FORM SECTIONS & INPUTS --- */
+        .form-section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 0, 85, 0.3);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 0;
+            font-size: 1.1rem;
+            color: #fff;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #333;
+            outline: none;
+            font-family: 'Rajdhani', sans-serif;
+            transition: 0.4s;
+        }
+
+        /* Glowing effect on focus */
+        input:focus, select:focus {
+            border-bottom-color: var(--primary);
+            box-shadow: 0 10px 20px -15px var(--primary);
+        }
+
+        label {
+            position: absolute;
+            top: 12px; left: 0;
+            color: #777;
+            pointer-events: none;
+            transition: 0.4s;
+            font-weight: 500;
+        }
+
+        /* Floating Label Animation */
+        input:focus ~ label, input:valid ~ label, select:valid ~ label {
+            top: -20px;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        /* Fancy Select Dropdown styling */
+        select {
+            color: var(--primary);
+            cursor: pointer;
+        }
+        select option { background: var(--bg-dark); color: white; }
+
+        /* --- 5. THE SUBMIT BUTTON --- */
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary);
+            color: var(--bg-dark);
+            box-shadow: 0 0 40px var(--primary);
+        }
+
+        /* Pulsing effect for the button */
+        .btn-submit::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(0,243,255,0.4) 0%, transparent 70%);
+            opacity: 0;
+            transition: 0.4s;
+            transform: scale(0.5);
+        }
+        .btn-submit:hover::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* --- 6. STATUS & LINKS --- */
+        .status-msg {
+            text-align: center;
+            margin-top: 20px;
+            min-height: 25px;
+            font-weight: bold;
+        }
+        .error { color: var(--secondary); text-shadow: 0 0 8px var(--secondary); }
+        .success { color: var(--primary); text-shadow: 0 0 8px var(--primary); }
+
+        .links { text-align: center; margin-top: 25px; color: #888; }
+        .links a { color: var(--primary); text-decoration: none; transition: 0.3s; }
+        .links a:hover { text-shadow: 0 0 10px var(--primary); }
+
+        /* Entrance Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Shake animation for errors */
+        .shake { animation: shake 0.4s linear; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="circuit-bg"></div>
+<div class="overlay-glow"></div>
+
+<div class="signup-container" id="signupCard">
+    <h2>INITIALIZE VAULT</h2>
+    <p class="subtitle">Establish Secure Digital Legacy Protocol</p>
+
+    <form id="signupForm">
+
+        <div class="form-section-title">/// USER IDENTITY ///</div>
+
+        <div class="input-group">
+            <input type="email" id="email" required autocomplete="off">
+            <label>Primary Email ID</label>
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="password" required>
+            <label>Master Access Key (Password)</label>
+        </div>
+
+        <div style="margin-top: 40px;" class="form-section-title">/// LEGACY PROTOCOL (NOMINEE) ///</div>
+
+        <div class="input-group">
+            <input type="text" id="nomineeName" required autocomplete="off">
+            <label>Trusted Nominee Name</label>
+        </div>
+
+        <div class="input-group">
+            <input type="email" id="nomineeEmail" required autocomplete="off">
+            <label>Nominee Email Destination</label>
+        </div>
+
+        <div class="input-group" style="margin-top: 35px;">
+            <select id="threshold" required>
+                <option value="" disabled selected hidden></option>
+                <option value="15">15 Days Inactivity Protocol</option>
+                <option value="30">30 Days Inactivity Protocol (Recommended)</option>
+                <option value="60">60 Days Inactivity Protocol</option>
+                <option value="90">90 Days Inactivity Protocol</option>
+            </select>
+            <label style="top: -20px; font-size: 0.9rem; color: var(--primary);">Dead Man's Timer Threshold</label>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnSubmit">ENGAGE PROTOCOL</button>
+
+        <div class="status-msg" id="statusText"></div>
+    </form>
+
+    <div class="links">
+        Already have an active vault? <a href="login.html">Access Terminal</a>
+    </div>
+</div>
+
+<script src="js/auth.js"></script>
+
+</body>
+</html>
