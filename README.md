@@ -54,8 +54,8 @@ The application follows a modular architecture to ensure security and reliabilit
 
 ## 📸 Screenshots
 
-| Dashboard | Asset Vault |
-| :--- | :--- |
+| Dashboard |
+| :--- 
 | Dashboard - <img width="1917" height="949" alt="Dashboard ScreenShot" src="https://github.com/user-attachments/assets/9d45e580-acbb-4d01-9fdc-cdee705200f2" />
 | Index     - <img width="1897" height="944" alt="index page screenshot" src="https://github.com/user-attachments/assets/079f7425-1de3-4894-bacf-81711600ddb6" />
 | Log in    - <img width="1917" height="940" alt="Log in page screenshot" src="https://github.com/user-attachments/assets/afc0c5e0-5ebd-46ad-a1cb-043ab9915b40" />
